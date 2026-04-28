@@ -3,327 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BI-система | QSOFT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Схема функционала</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-dark: #000000;
-            --secondary-dark: #0a0a0a;
-            --accent-red: #FF3B30;
-            --accent-red-light: #FF6B6B;
-            --accent-red-dark: #CC2F26;
-            --text-white: #ffffff;
-            --text-gray: #999999;
-            --text-light-gray: #CCCCCC;
-            --card-bg: rgba(255, 255, 255, 0.04);
-            --card-border: rgba(255, 255, 255, 0.12);
-            --card-border-hover: rgba(255, 59, 48, 0.5);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; overflow: hidden; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--primary-dark); color: var(--text-white); }
-        .presentation { width: 100%; height: 100vh; overflow: hidden; position: relative; }
-        .slides-container { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); height: 100%; }
-        .slide { min-width: 100%; height: 100vh; padding: 40px 64px 32px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-        /* Title Slide */
-        .slide-title { justify-content: center; align-items: center; text-align: center; }
-        .logo { font-size: 32px; font-weight: 800; color: var(--accent-red); margin-bottom: 40px; letter-spacing: 4px; }
-        .main-title { font-size: 72px; font-weight: 800; line-height: 1.1; margin-bottom: 32px; color: var(--text-white); }
-        .main-title span { color: var(--accent-red); }
-        .subtitle { font-size: 26px; color: var(--text-gray); font-weight: 400; max-width: 700px; line-height: 1.5; }
-        /* Header */
-        .slide-header { margin-bottom: 36px; }
-        .slide-number { font-size: 13px; color: var(--accent-red); font-weight: 600; letter-spacing: 2.5px; margin-bottom: 8px; text-transform: uppercase; }
-        .slide-title-text { font-size: 42px; font-weight: 700; line-height: 1.2; }
-        .slide-title-text span { color: var(--accent-red); }
-        /* Grids & Typography updates */
-        .problems-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 1; }
-        .problem-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; transition: all 0.3s ease; }
-        .problem-icon { width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(255, 59, 48, 0.25) 0%, rgba(255, 59, 48, 0.05) 100%); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 28px; }
-        .problem-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-        .problem-card p { font-size: 15px; color: var(--text-gray); line-height: 1.6; }
-        .questions-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; flex: 1; }
-        .question-category { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 32px; }
-        .category-title { font-size: 22px; font-weight: 700; margin-left: 16px; }
-        .question-list li { padding: 16px 0; font-size: 16px; color: var(--text-light-gray); display: flex; gap: 12px; }
-        .benefits-intro { background: linear-gradient(135deg, rgba(255, 59, 48, 0.12) 0%, rgba(255, 59, 48, 0.03) 100%); border: 1px solid rgba(255, 59, 48, 0.3); border-radius: 16px; padding: 24px 32px; margin-bottom: 32px; }
-        .benefits-intro-text h3 { font-size: 22px; margin-bottom: 6px; }
-        .benefits-intro-text p { font-size: 16px; }
-        .benefits-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; flex: 1; }
-        .benefit-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 32px 24px; text-align: center; }
-        .benefit-card h3 { font-size: 18px; margin-bottom: 12px; }
-        .benefit-card p { font-size: 15px; }
-        /* Custom Diagram (Moved to Slide 5) */
-        .diagram-wrapper { display: flex; align-items: center; justify-content: center; gap: 16px; flex: 1; margin-top: -10px; }
-        .flow-container { border: 1px solid var(--card-border); border-radius: 24px; padding: 32px 24px; background: var(--card-bg); display: flex; flex-direction: column; align-items: center; min-width: 210px; }
-        .flow-title { font-size: 13px; font-weight: 700; text-align: center; margin-bottom: 20px; color: var(--text-white); text-transform: uppercase; letter-spacing: 1.5px; }
-        .flow-item { background: var(--secondary-dark); border: 1px solid var(--card-border); border-radius: 10px; padding: 14px 18px; width: 100%; text-align: center; font-size: 14px; font-weight: 600; color: var(--text-light-gray); }
-        .diagram-arrow { color: var(--accent-red); flex-shrink: 0; }
-        .description-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 32px; max-width: 400px; margin-left: 24px; }
-        .description-card h3 { font-size: 20px; margin-bottom: 20px; }
-        .description-list { font-size: 14px; line-height: 1.7; color: var(--text-gray); }
-        .description-list li { margin-bottom: 14px; padding-left: 20px; position: relative; }
-        .description-list li::before { content: "•"; color: var(--accent-red); position: absolute; left: 0; font-weight: 800; font-size: 18px; }
-        /* Case Styles */
-        .case-section-title { font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
-        .case-section-text { font-size: 16px; line-height: 1.7; }
-        .case-solution-list li { font-size: 14px; padding: 12px 0; }
-        .result-text .metric { font-size: 22px; }
-        .result-text .desc { font-size: 13px; }
-        .steps-container { gap: 18px; }
-        .step-row { padding: 24px 32px; border-radius: 16px; }
-        .step-number { width: 48px; height: 48px; font-size: 22px; }
-        .step-content h3 { font-size: 18px; }
-        .step-content p { font-size: 15px; }
-        /* Nav */
-        .nav-container { bottom: 24px; right: 32px; padding: 8px 16px; border-radius: 12px; }
-        .nav-btn { width: 32px; height: 32px; font-size: 14px; }
-        .slide-counter { font-size: 13px; min-width: 45px; }
-        .progress-bar { height: 4px; }
-        .contact-btn { padding: 20px 56px; font-size: 22px; border-radius: 14px; margin-top: 48px; }
+        .flow-box {
+            border: 1.5px solid #374151;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            min-width: 180px;
+        }
+        .inner-box {
+            border: 1px solid #374151;
+            padding: 0.75rem 1rem;
+            background: white;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .arrow-svg {
+            color: #374151;
+            flex-shrink: 0;
+        }
     </style>
 </head>
-<body>
-    <div class="progress-bar" id="progressBar"></div>
-    <div class="presentation">
-        <div class="slides-container" id="slidesContainer">
+<body class="p-8 md:p-12 min-h-screen flex flex-col items-center">
+
+    <div class="max-w-7xl w-full">
+        <!-- Title -->
+        <h1 class="text-4xl font-semibold text-gray-900 mb-16">Как мы видим будущий функционал</h1>
+
+        <div class="flex flex-col lg:flex-row gap-12 items-start">
             
-            <section class="slide slide-title">
-                <div class="logo">QSOFT</div>
-                <h1 class="main-title"><span>BI-система</span><br>для вашего бизнеса</h1>
-                <p class="subtitle">Превращаем данные в управленческие решения. Прозрачность, скорость, точность.</p>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">01 / Проблемы</div><h2 class="slide-title-text">Типичные <span>проблемы</span></h2></div>
-                <div class="problems-grid">
-                    <div class="problem-card"><div class="problem-icon">📊</div><h3>Ручная отчётность</h3><p>Отчёты долго делают вручную (Excel, сводные таблицы), это занимает часы и дни работы</p></div>
-                    <div class="problem-card"><div class="problem-icon">🔀</div><h3>Нет единой правды</h3><p>Разные отделы работают с разными цифрами, нет согласованности в данных</p></div>
-                    <div class="problem-card"><div class="problem-icon">📉</div><h3>Непонятные метрики</h3><p>Не понимают, почему падает выручка или растёт CAC</p></div>
-                    <div class="problem-card"><div class="problem-icon">🔍</div><h3>Слепые зоны воронки</h3><p>Не видно узких мест в клиентской воронке, конверсия не измерена</p></div>
-                    <div class="problem-card"><div class="problem-icon">📱</div><h3>Атрибуция каналов</h3><p>Маркетинг не может оценить отдачу каналов и эффективность кампаний</p></div>
-                    <div class="problem-card"><div class="problem-icon">💰</div><h3>Финансовые прогнозы</h3><p>Финансовая отчетность и прогнозы неточны, либо их просто нет</p></div>
-                    <div class="problem-card"><div class="problem-icon">⚠️</div><h3>Операционные сбои</h3><p>Запасы, логистика, выполнение SLA — работа без сигналов и алертов</p></div>
-                    <div class="problem-card"><div class="problem-icon">🎯</div><h3>Вопросы руководства</h3><p>«Куда тратятся деньги и где экономия?» — быстрого ответа нет</p></div>
-                </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">02 / Возможности</div><h2 class="slide-title-text">Какие <span>вопросы</span> решает BI</h2></div>
-                <div class="questions-container">
-                    <div class="question-category">
-                        <div class="category-header"><div class="category-icon">🎯</div><h3 class="category-title">Стратегические</h3></div>
-                        <ul class="question-list">
-                            <li>Где фокусировать инвестиции (продукт/маркетинг/географии)?</li>
-                            <li>Какая продуктовая фича даёт рост retention/LTV?</li>
-                            <li>Как формируется единая панель KPI для CEO/COO?</li>
-                        </ul>
-                    </div>
-                    <div class="question-category">
-                        <div class="category-header"><div class="category-icon">📊</div><h3 class="category-title">Тактические</h3></div>
-                        <ul class="question-list">
-                            <li>Какие каналы приносят прибыльных пользователей (CAC vs LTV)?</li>
-                            <li>В каких сегментах растёт отток и почему?</li>
-                            <li>Какие регионы/сотрудники недовыполняют планы?</li>
-                        </ul>
-                    </div>
-                    <div class="question-category">
-                        <div class="category-header"><div class="category-icon">⚡</div><h3 class="category-title">Операционные</h3></div>
-                        <ul class="question-list">
-                            <li>Где накопились задачи в бэклоге и где падает SLA?</li>
-                            <li>Какие товары скоро закончатся на складе?</li>
-                            <li>Есть ли аномалии в платежах/транзакциях?</li>
-                        </ul>
+            <!-- Main Diagram Area -->
+            <div class="flex-grow flex flex-row items-center gap-2">
+                
+                <!-- Исходные данные -->
+                <div class="flex flex-col items-center">
+                    <div class="flow-box flex flex-col items-center justify-center min-h-[200px] gap-3">
+                        <h3 class="text-sm font-bold mb-2 text-center">Исходные<br>данные</h3>
+                        <div class="inner-box w-32">Media данные</div>
+                        <div class="inner-box w-32">Sales данные</div>
                     </div>
                 </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">03 / Выгоды</div><h2 class="slide-title-text">Кто <span>выигрывает</span> от BI</h2></div>
-                <div class="benefits-intro">
-                    <div class="benefits-intro-icon">⚡</div>
-                    <div class="benefits-intro-text"><h3>Увеличивается скорость принятия решений</h3><p>Время на сбор и подготовку отчетов сокращается с дней до минут</p></div>
-                </div>
-                <div class="benefits-grid">
-                    <div class="benefit-card"><div class="benefit-icon">👔</div><h3>Топ-менеджмент</h3><p>Видит прозрачные KPI компании в реальном времени</p></div>
-                    <div class="benefit-card"><div class="benefit-icon">🛠️</div><h3>Продуктовая команда</h3><p>Понимает поведение пользователей и влияние фич</p></div>
-                    <div class="benefit-card"><div class="benefit-icon">📢</div><h3>Маркетинг</h3><p>Оптимизирует каналы привлечения и рекламные бюджеты</p></div>
-                    <div class="benefit-card"><div class="benefit-icon">💵</div><h3>Финансы</h3><p>Строит прогнозы и контролирует маржинальность</p></div>
-                    <div class="benefit-card"><div class="benefit-icon">🚚</div><h3>Операции/логистика</h3><p>Сокращает издержки и оптимизирует процессы</p></div>
-                </div>
-            </section>
-            <!-- Slide 5: Architecture / Schema (REPLACED WITH YOUR DIAGRAM) -->
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">04 / Архитектура</div><h2 class="slide-title-text">Образ <span>результата</span></h2></div>
-                <div class="diagram-wrapper">
-                    <div class="flow-container" style="height: 420px; justify-content: center; gap: 18px;">
-                        <div class="flow-title">ИСХОДНЫЕ ДАННЫЕ</div>
-                        <div class="flow-item">Media данные</div>
-                        <div class="flow-item">Sales данные</div>
-                    </div>
-                    <svg class="diagram-arrow" width="40" height="24" viewBox="0 0 40 24" fill="none"><path d="M0 12H35M35 12L28 4M35 12L28 20" stroke="currentColor" stroke-width="2.5"/></svg>
-                    <div class="flow-container" style="height: 420px; gap: 16px;">
-                        <div class="flow-title">АНАЛИТИЧЕСКОЕ ХРАНИЛИЩЕ</div>
-                        <div class="flow-item">External tables</div>
-                        <svg class="diagram-arrow" width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M10 0V14M10 14L5 9M10 14L15 9" stroke="currentColor" stroke-width="2.5"/></svg>
-                        <div class="flow-item">Оперативные данные</div>
-                        <svg class="diagram-arrow" width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M10 0V14M10 14L5 9M10 14L15 9" stroke="currentColor" stroke-width="2.5"/></svg>
-                        <div class="flow-item">Витрины с данными</div>
-                    </div>
-                    <svg class="diagram-arrow" width="40" height="24" viewBox="0 0 40 24" fill="none" style="margin-top: 200px;"><path d="M0 12H35M35 12L28 4M35 12L28 20" stroke="currentColor" stroke-width="2.5"/></svg>
-                    <div class="flow-container" style="height: 420px; gap: 16px; flex-direction: column-reverse;">
-                        <div class="flow-title" style="margin-top: auto; margin-bottom: 0;">DATALENS</div>
-                        <div class="flow-item">Датасеты</div>
-                        <svg class="diagram-arrow" width="20" height="16" viewBox="0 0 20 16" fill="none" style="transform: rotate(180deg);"><path d="M10 0V14M10 14L5 9M10 14L15 9" stroke="currentColor" stroke-width="2.5"/></svg>
-                        <div class="flow-item">Графики</div>
-                        <svg class="diagram-arrow" width="20" height="16" viewBox="0 0 20 16" fill="none" style="transform: rotate(180deg);"><path d="M10 0V14M10 14L5 9M10 14L15 9" stroke="currentColor" stroke-width="2.5"/></svg>
-                        <div class="flow-item">Дашборды</div>
-                    </div>
-                    <svg class="diagram-arrow" width="40" height="24" viewBox="0 0 40 24" fill="none" style="margin-top: -260px;"><path d="M0 12H35M35 12L28 4M35 12L28 20" stroke="currentColor" stroke-width="2.5"/></svg>
-                    <div class="flow-item" style="width: 120px; padding: 24px 14px; margin-top: -260px;">EXCEL, CSV</div>
-                    <div class="description-card">
-                        <h3>Описание решения:</h3>
-                        <ul class="description-list">
-                            <li><b>Источник данных:</b> Media данные и Sales данные.</li>
-                            <li><b>Способ интеграции:</b> Через External Tables в выделенную БД (аналитическое хранилище).</li>
-                            <li><b>Периодичность обновления:</b> Автоматически 1 раз в час.</li>
-                            <li><b>Логика обработки:</b> SQL внутри аналитического хранилища.</li>
-                            <li><b>Визуализация:</b> Yandex DataLens.</li>
-                            <li><b>Инфраструктура:</b> Отдельный сервер с доступом в Yandex Cloud.</li>
-                        </ul>
+
+                <!-- Arrow 1 -->
+                <svg class="arrow-svg w-12 h-6" viewBox="0 0 50 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12H46M46 12L38 4M46 12L38 20" stroke="currentColor" stroke-width="2"/>
+                </svg>
+
+                <!-- Аналитическое хранилище -->
+                <div class="flex flex-col items-center">
+                    <div class="flow-box flex flex-col items-center gap-4 min-h-[380px]">
+                        <h3 class="text-sm font-bold text-center leading-tight">Аналитическое хранилище<br>данных</h3>
+                        
+                        <div class="inner-box w-48">External tables</div>
+                        
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+
+                        <div class="inner-box w-48">Оперативные данные</div>
+
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+
+                        <div class="inner-box w-48">Витрины с<br>аналитическими<br>данными</div>
                     </div>
                 </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">05 / Процесс</div><h2 class="slide-title-text">Этапы <span>внедрения</span></h2></div>
-                <div class="steps-container">
-                    <div class="step-row"><div class="step-number">1</div><div class="step-content"><h3>Приоритезация метрик</h3><p>Составить и приоритезировать список метрик с учетом специфики отрасли</p></div><div class="step-arrow">→</div></div>
-                    <div class="step-row"><div class="step-number">2</div><div class="step-content"><h3>Проектирование архитектуры</h3><p>Утвердить требования, спроектировать архитектуру, выбрать BI инструменты и стек</p></div><div class="step-arrow">→</div></div>
-                    <div class="step-row"><div class="step-number">3</div><div class="step-content"><h3>Аудит источников данных</h3><p>Проанализировать текущие источники и готовность данных</p></div><div class="step-arrow">→</div></div>
-                    <div class="step-row"><div class="step-number">4</div><div class="step-content"><h3>Настройка инфраструктуры</h3><p>Подготовить мощности, настроить BI инструменты, подключить источники данных</p></div><div class="step-arrow">→</div></div>
-                    <div class="step-row"><div class="step-number">5</div><div class="step-content"><h3>MVP дашборды</h3><p>Настроить дашборды MVP версии для системного принятия решений</p></div><div class="step-arrow">→</div></div>
-                    <div class="step-row"><div class="step-number">6</div><div class="step-content"><h3>Внедрение и развитие</h3><p>Дальнейшее развитие и подготовка ТЗ на 2-ю версию (идем по итерациям)</p></div><div class="step-arrow">✓</div></div>
+
+                <!-- Arrow 2 (Connects Marts to Datasets) -->
+                <div class="flex items-center" style="margin-top: 200px;">
+                    <svg class="arrow-svg w-12 h-6" viewBox="0 0 50 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12H46M46 12L38 4M46 12L38 20" stroke="currentColor" stroke-width="2"/>
+                    </svg>
                 </div>
-            </section>
-            <!-- Case Slides 7-11 -->
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">06 / Кейс</div><h2 class="slide-title-text">Таксопарк <span>369</span></h2></div>
-                <div class="case-detail">
-                    <div class="case-info">
-                        <div class="case-section"><div class="case-section-title">Задача</div><p class="case-section-text">Таксопарк 369 сталкивался с проблемой оперативного контроля выполнения плановых показателей в различных областях бизнеса. Ситуацию осложняло наличие множества баз данных. Заменить Tableau на отечественный аналог и доработать функционал.</p></div>
-                        <div class="case-section"><div class="case-section-title">Решение</div><ul class="case-solution-list"><li>Настроили получение данных из разных источников: парсинг, БД, API</li><li>Собрали и смэтчили данные из 5 источников (CRM, 1C, YandexFleet и др.)</li><li>Создали единое корпоративное хранилище (КХД)</li><li>Автоматизировали ETL-процесс на базе Apache Airflow</li></ul></div>
-                    </div>
-                    <div class="case-results-panel">
-                        <div class="results-grid"><div class="result-item"><div class="result-text"><div class="metric">В 12 раз</div><div class="desc">ускорили отчеты</div></div></div><div class="result-item"><div class="result-text"><div class="metric">На 25%</div><div class="desc">точнее прогнозы</div></div></div></div>
-                        <div class="stack-section"><div class="stack-tags"><span class="stack-tag-large">Datalens</span><span class="stack-tag-large">Airflow</span><span class="stack-tag-large">Clickhouse</span></div></div>
-                    </div>
-                </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">07 / Кейс</div><h2 class="slide-title-text">Финансовая аналитика <span>QSOFT</span></h2></div>
-                <div class="case-detail">
-                    <div class="case-info">
-                        <div class="case-section"><div class="case-section-title">Задача</div><p class="case-section-text">Обеспечить оперативную финансовую аналитику портфелей проектов для руководителей, организовать работу с разрозненными источниками и не связанными данными.</p></div>
-                        <div class="case-section"><div class="case-section-title">Решение</div><ul class="case-solution-list"><li>Интеграция Google Cloud API, 1C, Jira и RestAPI</li><li>Смэтчили данные из более чем 6 источников</li><li>Организовали единое хранилище и дашборды в Superset</li><li>Многоуровневый RLS доступ по ролям</li></ul></div>
-                    </div>
-                    <div class="case-results-panel">
-                        <div class="results-grid"><div class="result-item"><div class="result-text"><div class="metric">Real-time</div><div class="desc">показатели в реальном времени</div></div></div><div class="result-item"><div class="result-text"><div class="metric">2 дня</div><div class="desc">на новый отчет</div></div></div></div>
-                        <div class="stack-section"><div class="stack-tags"><span class="stack-tag-large">Superset</span><span class="stack-tag-large">Airflow</span><span class="stack-tag-large">Clickhouse</span></div></div>
+
+                <!-- Datalens -->
+                <div class="flex flex-col items-center">
+                    <div class="flow-box flex flex-col-reverse items-center gap-4 min-h-[380px]">
+                        <h3 class="text-sm font-bold text-center mb-auto pt-4">Datalens</h3>
+                        
+                        <div class="inner-box w-40">Датасеты</div>
+                        
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+                            <path d="M12 0V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+
+                        <div class="inner-box w-40">Графики</div>
+
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+                            <path d="M12 0V20M12 20L6 14M12 20L18 14" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+
+                        <div class="inner-box w-40">Дашборды</div>
                     </div>
                 </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">08 / Кейс</div><h2 class="slide-title-text">Аналитика продаж <span>Teamly</span></h2></div>
-                <div class="case-detail">
-                    <div class="case-info">
-                        <div class="case-section"><div class="case-section-title">Задача</div><p class="case-section-text">Аналитика лидов продукта для руководства и отдела продаж, увеличение скорости ответов техподдержки.</p></div>
-                        <div class="case-section"><div class="case-section-title">Решение</div><ul class="case-solution-list"><li>Выгрузка объемных данных: CRM, таблицы, платежи</li><li>Интеграция КХД с Google-таблицами для ввода динамики</li><li>Дашборды в Datalens (воронка, MRR)</li><li>Когортный анализ лидов</li></ul></div>
-                    </div>
-                    <div class="case-results-panel">
-                        <div class="results-grid"><div class="result-item"><div class="result-text"><div class="metric">-90%</div><div class="desc">времени на отчетность</div></div></div><div class="result-item"><div class="result-text"><div class="metric">На 20%</div><div class="desc">быстрее техподдержка</div></div></div></div>
-                        <div class="stack-section"><div class="stack-tags"><span class="stack-tag-large">Datalens</span><span class="stack-tag-large">Yandex Cloud</span><span class="stack-tag-large">Clickhouse</span></div></div>
-                    </div>
+
+                <!-- Arrow 3 -->
+                <div class="flex items-center" style="margin-top: -240px;">
+                    <svg class="arrow-svg w-12 h-6" viewBox="0 0 50 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 12H46M46 12L38 4M46 12L38 20" stroke="currentColor" stroke-width="2"/>
+                    </svg>
                 </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">09 / Кейс</div><h2 class="slide-title-text">Маркетплейс <span>аптечной сети</span></h2></div>
-                <div class="case-detail">
-                    <div class="case-info">
-                        <div class="case-section"><div class="case-section-title">Задача</div><p class="case-section-text">Хранилище данных и BI перестали справляться с объемом (30 млн событий в день). Требовалось восстановить работу.</p></div>
-                        <div class="case-section"><div class="case-section-title">Решение</div><ul class="case-solution-list"><li>Managed сервисы сбора данных с сайта и мобильного приложения</li><li>Переработка архитектуры на DataVault</li><li>Реализация инкрементальной (постепенной) загрузки витрин</li></ul></div>
-                    </div>
-                    <div class="case-results-panel">
-                        <div class="results-grid"><div class="result-item"><div class="result-text"><div class="metric">В 6 раз</div><div class="desc">меньше нагрузки</div></div></div><div class="result-item"><div class="result-text"><div class="metric">DataVault</div><div class="desc">стабильная архитектура</div></div></div></div>
-                        <div class="stack-section"><div class="stack-tags"><span class="stack-tag-large">Dbt Labs</span><span class="stack-tag-large">Greenplum</span><span class="stack-tag-large">Clickhouse</span></div></div>
-                    </div>
+
+                <!-- EXCEL, CSV -->
+                <div class="flex items-center" style="margin-top: -240px;">
+                    <div class="inner-box w-36 py-6 px-4">EXCEL, CSV</div>
                 </div>
-            </section>
-            <section class="slide slide-content">
-                <div class="slide-header"><div class="slide-number">10 / Кейс</div><h2 class="slide-title-text">Корпоративный портал <span>Протек</span></h2></div>
-                <div class="case-detail">
-                    <div class="case-info">
-                        <div class="case-section"><div class="case-section-title">Задача</div><p class="case-section-text">Получить отчет по активности сотрудников на внутреннем портале для оценки вовлеченности.</p></div>
-                        <div class="case-section"><div class="case-section-title">Решение</div><ul class="case-solution-list"><li>Разработка и внедрение системы сбора продуктовых метрик</li><li>Визуализация аналитики в Superset (топ пользователей, посещаемость)</li></ul></div>
-                    </div>
-                    <div class="case-results-panel">
-                        <div class="results-grid"><div class="result-item"><div class="result-text"><div class="metric">15 мин</div><div class="desc">вместо 2 часов на отчет</div></div></div><div class="result-item"><div class="result-text"><div class="metric">Рейтинги</div><div class="desc">система мотивации персонала</div></div></div></div>
-                        <div class="stack-section"><div class="stack-tags"><span class="stack-tag-large">Superset</span><span class="stack-tag-large">MariaDB</span></div></div>
-                    </div>
+
+            </div>
+
+            <!-- Description Sidebar -->
+            <div class="lg:w-96 shrink-0">
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
+                    <h2 class="text-lg font-bold mb-6">Описание решения:</h2>
+                    <ul class="space-y-4 text-sm leading-relaxed text-gray-800">
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Источник данных:</span> Media данные и Sales данные.</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Способ интеграции:</span> Через External Tables в выделенную базу данных (аналитическое хранилище)</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Периодичность обновления:</span> 1 раз в час.</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Логика обработки:</span> Реализована средствами SQL внутри аналитического хранилища.</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Система визуализации:</span> Yandex DataLens, подключенный к хранилищу.</span>
+                        </li>
+                        <li class="flex gap-2">
+                            <span class="font-bold shrink-0">•</span>
+                            <span><span class="font-bold">Инфраструктура:</span> Аналитическое хранилище размещено на отдельном сервере (виртуальной машине) с сетевым доступом для передачи данных в Yandex Cloud.</span>
+                        </li>
+                    </ul>
                 </div>
-            </section>
-            <!-- Final Slide -->
-            <section class="slide slide-title">
-                <div class="logo">QSOFT</div>
-                <h1 class="main-title">
-                    Ваш партнер<br>
-                    <span>по цифровизации</span>
-                </h1>
-                <a href="https://qsoft.ru/" target="_blank" class="contact-btn">
-                    qsoft.ru
-                </a>
-            </section>
+            </div>
+
         </div>
     </div>
-    <div class="nav-container">
-        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">←</button>
-        <div class="nav-dots" id="navDots"></div>
-        <div class="slide-counter"><span id="currentSlide">1</span>/<span id="totalSlides">12</span></div>
-        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">→</button>
-    </div>
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const slidesContainer = document.getElementById('slidesContainer');
-        const navDots = document.getElementById('navDots');
-        const progressBar = document.getElementById('progressBar');
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => goToSlide(i);
-            navDots.appendChild(dot);
-        }
-        function updateSlide() {
-            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-            document.getElementById('currentSlide').textContent = currentSlide + 1;
-            progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-        }
-        function changeSlide(direction) {
-            currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + direction));
-            updateSlide();
-        }
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlide();
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
-            else if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
-        });
-        document.getElementById('totalSlides').textContent = totalSlides;
-        updateSlide();
-    </script>
+
 </body>
 </html>
